@@ -1,0 +1,26 @@
+---
+spring:
+  profiles: peer1                                # 指定profile=peer1
+  application:
+    name: discovery
+---
+server:
+  port: 8761
+security:
+  basic:
+    enabled: true #开启认证
+  user:
+    name: zh
+    password: zh123
+eureka:
+  instance:
+    hostname: 127.0.0.1                               # 指定当profile=peer1时，主机名
+#    prefer-ip-address: true
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/ # 将自己注册到peer2这个Eureka上面去
+  server:
+    enable-self-preservation: false
+
